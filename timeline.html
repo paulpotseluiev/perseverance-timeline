@@ -74,7 +74,7 @@ function TimeLoop() {
   setTimeout(function() {
 	var d = new Date();
 	var n = d.getTime();
-	if(n > 1613680935000){
+	if(n > 1613681440000){
 		$('.TimerTo').hide();
 		$('.line-filler').css("height",i*2);
 		i++;
@@ -96,7 +96,7 @@ function TimeLoop() {
 		}
 	}
 	else {
-	$(".timerVal").html(Number((1613680935000 - n)/1000/60).toFixed());
+	$(".timerVal").html(Number((1613681440000 - n)/1000/60).toFixed());
 	TimeLoop();
 	}
   }, 1000)
