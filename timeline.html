@@ -45,7 +45,11 @@
 0deg
 , rgba(110,33,11,1) 0%, rgb(214 148 72) 100%);width:192px;">
 <div class="timer" style="height:32px;margin:0px auto;color:white;font-weight:bold;font-size:30px;width:90px;">T+<span id="timer">0</span>s</div>
-<div class="current-image" style="height:160px;"></div>
+<div style="height:160px;background: linear-gradient( 
+0deg
+ , rgb(110 33 11) 0%, rgb(198 130 63) 100%);"">
+<div class="current-image" style="width:192px;height:160px;background:url(icons/perseverance-edlprofile-1.png);background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
+</div>
 </div>
 </div>
 <div class="bottomline" style="display:inline-block;height:108px;width:calc(100% - 192px);float:right;margin-top:972px;background: rgb(168 97 45);
@@ -70,6 +74,7 @@ function TimeLoop() {
 		j++;
 		console.log(j);
 		$("#"+j).css("color","rgb(14 14 14)");
+		$(".current-image").css("background-image","url(icons/perseverance-edlprofile-"+j+".png)");
 	}
     if (i < 411) { 
       TimeLoop(); 
