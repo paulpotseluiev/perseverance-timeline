@@ -47,8 +47,8 @@
 <div class="timer" style="height:32px;margin:0px auto;color:white;font-weight:bold;font-size:30px;width:90px;">T+<span id="timer">0</span>s</div>
 <div style="height:160px;background: linear-gradient( 
 0deg
- , rgb(110 33 11) 0%, rgb(198 130 63) 100%);"">
-<div class="current-image" style="width:192px;height:160px;background:url(icons/perseverance-edlprofile-1.png);background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
+ , rgb(110 33 11) 0%, rgb(198 130 63) 100%);">
+<div class="current-image" style="display:none;width:192px;height:160px;background:url(icons/perseverance-edlprofile-1.png);background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
 </div>
 </div>
 </div>
@@ -56,7 +56,11 @@
     background: linear-gradient( 
 0deg
  , rgb(110 33 11) 0%, rgb(167 96 45) 100%);"> 
-
+<div class="TimerTo" style="color: white;
+    font-size: 48px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 20px;">До входа в атмосферу осталось <span class="timerVal"></span> мин.</div>
 </div>
 </div>
 </body>
@@ -65,24 +69,37 @@ jQuery(document).ready(function($){
 var totalTime = 410;
 var i = 0;
 var j = 1;
+var d = new Date();
 function TimeLoop() { 
-  setTimeout(function() { 
-    $('.line-filler').css("height",i*2) 
-    i++;
-	$("#timer").html(i);
-	if([80,90,240,260,290,330,350,410].includes(i)){
-		j++;
-		console.log(j);
-		$("#"+j).css("color","rgb(14 14 14)");
-		$(".current-image").css("background-image","url(icons/perseverance-edlprofile-"+j+".png)");
+  setTimeout(function() {
+	var d = new Date();
+	var n = d.getTime();
+	if(n > 1613674146000){
+		$('.TimerTo').hide();
+		$('.line-filler').css("height",i*2);
+		i++;
+		if(i == 1){
+			$(".current-image").css("display","block")
+		}
+		$("#timer").html(i);
+		if([80,90,240,260,290,330,350,410].includes(i)){
+			j++;
+			console.log(j);
+			$("#"+j).css("color","rgb(14 14 14)");
+			$(".current-image").css("background-image","url(icons/perseverance-edlprofile-"+j+".png)");
+		}
+		if (i < 411) { 
+		  TimeLoop(); 
+		}
+		else {
+		$(".timer").html("");
+		}
 	}
-    if (i < 411) { 
-      TimeLoop(); 
-    }
 	else {
-	$(".timer").html("");
+	$(".timerVal").html(Number((1613674146000 - n)/1000/60).toFixed());
+	TimeLoop();
 	}
-  }, 100)
+  }, 1000)
 }
 
 TimeLoop(); 
